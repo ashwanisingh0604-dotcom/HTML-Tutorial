@@ -308,7 +308,7 @@
                     </div>
                     <div class="product-card overflow-hidden flex flex-col items-center text-center group">
                         <div class="overflow-hidden rounded-xl w-full aspect-[4/3] bg-cream flex items-center justify-center">
-                            <img src="Assets/Gemini_Generated_Image_wthir6wthir6wthi.png" alt="Green Meenakari Gold Jhumka " loading="lazy" width="300" height="300" class="product-img w-full h-full object-cover"/>
+                            <img src="Jhumka Earrings" alt="Green Meenakari Gold Jhumka " loading="lazy" width="300" height="300" class="product-img w-full h-full object-cover"/>
                         </div>
                         <h3 class="font-display text-2xl text-ink mt-5">Jhumka Earrings</h3>
                         <button class="mt-4 mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink/70 hover:text-gold transition-colors">
@@ -846,6 +846,67 @@
                 </div>
             </div>
             </div>
+            <!-- Product Modal -->
+            <div class="product-modal-overlay" id="productModalOverlay"></div>
+            <div class="product-modal" id="productModal">
+                <button class="product-modal-close" id="productModalClose">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+                <div class="product-modal-body">
+                    <div class="product-modal-image-side">
+                        <div class="product-modal-img-wrapper">
+                            <img id="modalProductImg" src="" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="product-modal-info-side">
+                    <p class="eyebrow" id="modalProductCategory">— Jewelry</p>
+                    <h2 class="product-modal-title" id="modalProductName">Product Name</h2>
+                    <div class="product-modal-prices">
+                        <span class="product-modal-price" id="modalProductPrice">₹0.00</span>
+                        <span class="product-modal-old-price" id="modalProductOldPrice"></span>
+                    </div>
+                <div class="product-modal-stars">
+                    <span>⭐⭐⭐⭐⭐</span>
+                    <span class="product-modal-reviews">(24 reviews)</span>
+                </div>
+                <p class="product-modal-desc" id="modalProductDesc">
+                    Handcrafted with love by skilled artisans. Each piece is unique and made to last a lifetime.
+                </p>
+                <div class="product-modal-divider"></div>
+                <div class="product-modal-qty">
+                    <span class="product-modal-qty-label">Quantity</span>
+                    <div class="product-modal-qty-controls">
+                        <button class="modal-qty-btn" id="modalQtyMinus">−</button>
+                        <span class="modal-qty-num" id="modalQtyNum">1</span>
+                        <button class="modal-qty-btn" id="modalQtyPlus">+</button>
+                    </div>
+                </div>
+                <div class="product-modal-actions">
+                    <button class="product-modal-add-btn" id="modalAddToCart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                        <path d="M3.103 6.034h17.794"/>
+                        <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/>
+                    </svg>
+                    Add To Cart
+                    </button>
+                    <button class="product-modal-wishlist-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                    </svg>
+                    </button>
+                </div>
+                <div class="product-modal-tags">
+                    <span class="product-modal-tag">Handcrafted</span>
+                    <span class="product-modal-tag">Pan India Delivery</span>
+                    <span class="product-modal-tag">Authentic</span>
+                </div>
+                </div>
+            </div>
+    </div>
         </main>
         <div class="cart-overlay" id="cartOverlay"></div>
         <div class="cart-sidebar" id="cartSidebar">
@@ -1184,6 +1245,113 @@
                 closeMobileMenu();
             });
             });
+            // ===== PRODUCT MODAL =====
+            const productModal         = document.getElementById('productModal');
+            const productModalOverlay  = document.getElementById('productModalOverlay');
+            const productModalClose    = document.getElementById('productModalClose');
+            const modalProductImg      = document.getElementById('modalProductImg');
+            const modalProductName     = document.getElementById('modalProductName');
+            const modalProductPrice    = document.getElementById('modalProductPrice');
+            const modalProductOldPrice = document.getElementById('modalProductOldPrice');
+            const modalQtyNum          = document.getElementById('modalQtyNum');
+            const modalAddToCart       = document.getElementById('modalAddToCart');
+
+            let modalQty = 1;
+            let modalCurrentProduct = {};
+
+            function openProductModal(data) {
+                modalProductImg.src              = data.img;
+                modalProductImg.alt              = data.name;
+                modalProductName.textContent     = data.name;
+                modalProductPrice.textContent    = data.price;
+                modalProductOldPrice.textContent = data.oldPrice || '';
+                modalQty = 1;
+                modalQtyNum.textContent = 1;
+                modalCurrentProduct = data;
+                productModal.style.display = 'grid';
+                setTimeout(function() {
+                    productModal.classList.add('active');
+                    productModalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }, 10);
+            }
+
+            function closeProductModal() {
+                productModal.classList.remove('active');
+                productModalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(function() {
+                    productModal.style.display = 'none';
+                }, 400);
+            }
+
+            productModalClose.addEventListener('click', closeProductModal);
+            productModalOverlay.addEventListener('click', closeProductModal);
+
+            document.getElementById('modalQtyMinus').addEventListener('click', function() {
+                if (modalQty > 1) {
+                    modalQty--;
+                    modalQtyNum.textContent = modalQty;
+                }
+            });
+
+            document.getElementById('modalQtyPlus').addEventListener('click', function() {
+                modalQty++;
+                modalQtyNum.textContent = modalQty;
+            });
+
+            modalAddToCart.addEventListener('click', function() {
+                const existing = cart.find(item => item.name === modalCurrentProduct.name);
+                if (existing) {
+                    existing.qty += modalQty;
+                } else {
+                    cart.push({
+                    id: Date.now(),
+                    name: modalCurrentProduct.name,
+                    price: modalCurrentProduct.price,
+                    img: modalCurrentProduct.img,
+                    qty: modalQty
+                    });
+                }
+                updateBadge();
+                closeProductModal();
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+                renderCart();
+            });
+
+            document.querySelectorAll('.product-card').forEach(function(card) {
+                const img      = card.querySelector('img');
+                const name     = card.querySelector('h4') || card.querySelector('h3');
+                const price    = card.querySelector('.text-gold.font-semibold');
+                const oldPrice = card.querySelector('.line-through');
+
+                if (img && name) {
+                    img.style.cursor = 'pointer';
+                    img.addEventListener('click', function() {
+                    openProductModal({
+                        img      : img.src,
+                        name     : name.textContent.trim(),
+                        price    : price ? price.textContent.trim() : '₹0',
+                        oldPrice : oldPrice ? oldPrice.textContent.trim() : ''
+                    });
+                    });
+
+                    name.style.cursor = 'pointer';
+                    name.addEventListener('click', function() {
+                    openProductModal({
+                        img      : img.src,
+                        name     : name.textContent.trim(),
+                        price    : price ? price.textContent.trim() : '₹0',
+                        oldPrice : oldPrice ? oldPrice.textContent.trim() : ''
+                    });
+                });
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeProductModal();
+        });
             updateBadge();
             </script>
     </body>
