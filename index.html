@@ -193,21 +193,33 @@
                         <a href="#contact" class="text-[13px] uppercase tracking-wider text-cream/80 hover:text-gold transition-colors">Contact</a>
                     </nav>
                     <div class="flex items-center gap-5 text-cream">
-                        <button aria-label="Search" class="hover:text-gold transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" aria-hidden="true">
-                                <path d="m21 21-4.34-4.34"></path>
-                                <circle cx="11" cy="11" r="8"></circle>
-                            </svg>
-                        </button>
-                        <button aria-label="Cart" class="relative hover:text-gold transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag" aria-hidden="true">
+                        <div class="search-wrapper">
+                            <button id="searchBtn" aria-label="Search" class="hover:text-gold transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                 <path d="m21 21-4.34-4.34"></path>
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                </svg>
+                            </button>
+                        <div class="search-dropdown" id="searchDropdown">
+                            <input type="text" id="searchInput" placeholder="Search jewelry..." />
+                            <button class="search-submit-btn" id="searchSubmit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="m21 21-4.34-4.34"></path>
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div> 
+                </div>
+                        <button id="cartBtn" aria-label="Cart" class="relative hover:text-gold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M16 10a4 4 0 0 1-8 0"></path>
                                 <path d="M3.103 6.034h17.794"></path>
                                 <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path>
                             </svg>
-                            <span class="absolute -top-2 -right-2 bg-gold text-ink text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">2</span>
+                            <span id="cartBadge" class="absolute -top-2 -right-2 bg-gold text-ink text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
                         </button>
-                        <button aria-label="Menu" class="lg:hidden hover:text-gold transition-colors">
+                        <button id="mobileMenuBtn" aria-label="Menu" class="lg:hidden hover:text-gold transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true">
                                 <path d="M4 5h16"></path>
                                 <path d="M4 12h16"></path>
@@ -798,7 +810,62 @@
                     </div>
                 </div>
             </footer>
+            <!-- Mobile Menu -->
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+            <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <span class="font-display text-xl tracking-widest text-cream uppercase">
+                Ashvika<span style="color:var(--gold)">Luxe</span>
+                </span>
+                <button class="mobile-menu-close" id="mobileMenuClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+                </button>
+            </div>
+            <nav class="mobile-nav">
+                <a href="#hero" class="mobile-nav-link" id="mobileNavLink1">Home</a>
+                <a href="#about" class="mobile-nav-link" id="mobileNavLink2">About</a>
+                <a href="#shop" class="mobile-nav-link" id="mobileNavLink3">Shop</a>
+                <a href="#contact" class="mobile-nav-link" id="mobileNavLink4">Contact</a>
+            </nav>
+            <div class="mobile-menu-footer">
+                <div class="flex gap-3 justify-center">
+                <a href="#" class="w-9 h-9 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-ink transition-all text-cream">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full border border-cream/20 flex items-center justify-center hover:bg-gold hover:border-gold hover:text-ink transition-all text-cream">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                </div>
+            </div>
+            </div>
         </main>
+        <div class="cart-overlay" id="cartOverlay"></div>
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>Your Cart</h3>
+                <button class="close-cart-btn" id="closeCart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                     <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="cart-items-container" id="cartItemsContainer"></div>
+            <div class="cart-footer" id="cartFooter" style="display:none;">
+                <div class="cart-total-row">
+                    <span>Total</span>
+                    <span id="cartTotal">₹0.00</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
         <script>
             (function(t) {
                 let s;
@@ -918,6 +985,206 @@
         <script type="module" async="">
             import("/assets/index-cTDXvLKA.js")
         </script>
-        
+        <script>
+        let cart = [];
+
+        const searchBtn      = document.getElementById('searchBtn');
+        const searchDropdown = document.getElementById('searchDropdown');
+        const searchInput    = document.getElementById('searchInput');
+        const cartBtn        = document.getElementById('cartBtn');
+        const cartSidebar    = document.getElementById('cartSidebar');
+        const cartOverlay    = document.getElementById('cartOverlay');
+        const closeCartBtn   = document.getElementById('closeCart');
+        const cartBadge      = document.getElementById('cartBadge');
+        const cartContainer  = document.getElementById('cartItemsContainer');
+        const cartFooter     = document.getElementById('cartFooter');
+        const cartTotalEl    = document.getElementById('cartTotal');
+
+        // ===== SEARCH =====
+        searchBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            searchDropdown.classList.toggle('active');
+            if (searchDropdown.classList.contains('active')) {
+                setTimeout(() => searchInput.focus(), 100);
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!searchDropdown.contains(e.target) && e.target !== searchBtn) {
+                searchDropdown.classList.remove('active');
+            }
+        });
+
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const q = searchInput.value.trim();
+                if (q) {
+                searchDropdown.classList.remove('active');
+                searchInput.value = '';
+                document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // ===== CART OPEN/CLOSE =====
+        cartBtn.addEventListener('click', function() {
+            cartSidebar.classList.add('active');
+            cartOverlay.classList.add('active');
+            renderCart();
+        });
+
+        function closeCart() {
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        }
+
+        closeCartBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCart();
+        });
+
+        // ===== ADD TO CART =====
+        document.querySelectorAll('.btn-dark').forEach(function(btn) {
+            if (btn.textContent.trim() === 'Add To Cart') {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.product-card');
+                    const name = card.querySelector('h4') ? card.querySelector('h4').textContent.trim() : 'Product';
+                    const priceEl = card.querySelector('.text-gold.font-semibold');
+                    const price = priceEl ? priceEl.textContent.trim() : '₹0';
+                    const imgEl = card.querySelector('img');
+                    const img = imgEl ? imgEl.src : '';
+
+                    const existing = cart.find(item => item.name === name);
+                    if (existing) {
+                        existing.qty += 1;
+                    } else {
+                        cart.push({ id: Date.now(), name, price, img, qty: 1 });
+                    }
+
+                updateBadge();
+                showAddedFeedback(btn);
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+                renderCart();
+                });
+            }
+        });
+
+        // ===== FEEDBACK =====
+        function showAddedFeedback(btn) {
+            const original = btn.textContent;
+            btn.textContent = '✓ Added!';
+            btn.style.background = 'var(--gold)';
+            btn.style.color = 'var(--ink)';
+            setTimeout(function() {
+                btn.textContent = original;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 1200);
+        }
+
+        // ===== RENDER CART =====
+        function renderCart() {
+            cartContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartFooter.style.display = 'none';
+                cartContainer.innerHTML = `
+                <div class="cart-empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                    <path d="M3.103 6.034h17.794"/>
+                    <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/>
+                    </svg>
+                    <p>Your cart is empty</p>
+                    <p style="font-size:12px;opacity:0.6;">Add some beautiful jewelry!</p>
+                </div>`;
+                return;
+            }
+
+            cartFooter.style.display = 'block';
+            let total = 0;
+
+            cart.forEach(function(item) {
+                const numPrice = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+                total += numPrice * item.qty;
+
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
+                <img class="cart-item-img" src="${item.img}" alt="${item.name}"
+                    onerror="this.src='https://via.placeholder.com/65x65/faf0dc/1a1a1a?text=✦'"/>
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">${item.price}</div>
+                    <div class="cart-item-qty">
+                    <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+                    <span class="qty-num">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                </div>
+                <button class="cart-item-remove" onclick="removeItem(${item.id})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                    </svg>
+                </button>`;
+                cartContainer.appendChild(el);
+            });
+
+            cartTotalEl.textContent = '₹' + total.toFixed(2);
+            }
+
+            // ===== QTY CHANGE =====
+            function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            updateBadge();
+            renderCart();
+            }
+
+            // ===== REMOVE =====
+            function removeItem(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateBadge();
+            renderCart();
+            }
+
+            // ===== BADGE =====
+            function updateBadge() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartBadge.textContent = count;
+            cartBadge.style.display = count > 0 ? 'flex' : 'none';
+            }
+            // ===== MOBILE MENU =====
+            const mobileMenuBtn     = document.getElementById('mobileMenuBtn');
+            const mobileMenu        = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuClose   = document.getElementById('mobileMenuClose');
+
+            function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            }
+
+            function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            }
+
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                closeMobileMenu();
+            });
+            });
+            updateBadge();
+            </script>
     </body>
 </html>
